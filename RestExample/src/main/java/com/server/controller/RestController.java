@@ -3,29 +3,34 @@ package com.server.controller;
 
 import com.server.model.Client;
 import com.server.service.ClientService;
+import io.swagger.v3.oas.annotations.OpenAPI31;
+import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
-@RestController
-public class ClientController {
+@Controller
+@RequestMapping("v1/clients")
+public class RestController {
 
     private final ClientService clientService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public RestController(ClientService clientService) {
         this.clientService = clientService;
     }
-    @PostMapping(value = "/clients")
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody Client client) {
         clientService.create(client);
         return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/clients")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Client>> read() {
         final List<Client> clients = clientService.readAll();
 
@@ -33,7 +38,7 @@ public class ClientController {
                 ? new ResponseEntity<>(clients, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @GetMapping(value = "/clients/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Client> read(@PathVariable(name = "id") int id) {
         final Client client = clientService.read(id);
 
@@ -42,7 +47,7 @@ public class ClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/clients/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody Client client) {
         final boolean updated = clientService.update(client, id);
 
@@ -51,7 +56,7 @@ public class ClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/clients/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
         final boolean deleted = clientService.delete(id);
 
