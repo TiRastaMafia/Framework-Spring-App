@@ -25,8 +25,10 @@ public class RestClientController {
 
     @Autowired
     public RestClientController(ClientService clientService) {
+
         this.clientService = clientService;
     }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody Client client) {
         clientService.create(client);

@@ -8,9 +8,9 @@
 		<!--  lookup parent from repository  -->
 	</parent>
 	<groupId>com.server</groupId>
-	<artifactId>RestExample</artifactId>
+	<artifactId>RestExemple</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RestExample</name>
+	<name>RestExemple</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
