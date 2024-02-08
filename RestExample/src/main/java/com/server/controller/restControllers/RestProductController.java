@@ -40,7 +40,7 @@ public class RestProductController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Product> read(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Product> readId(@PathVariable(name = "id") int id) {
         final Product product = productService.read(id);
 
         return product != null

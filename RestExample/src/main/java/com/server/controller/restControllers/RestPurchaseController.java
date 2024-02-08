@@ -56,7 +56,7 @@ public class RestPurchaseController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Purchase> read(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Purchase> readId(@PathVariable(name = "id") int id) {
         final Purchase purchase = purchaseService.read(id);
 
         return purchase != null

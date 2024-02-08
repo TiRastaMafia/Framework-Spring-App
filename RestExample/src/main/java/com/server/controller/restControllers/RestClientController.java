@@ -44,7 +44,7 @@ public class RestClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Client> read(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Client> readId(@PathVariable(name = "id") int id) {
         final Client client = clientService.read(id);
 
         return client != null
