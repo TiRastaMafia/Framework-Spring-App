@@ -17,8 +17,9 @@ import java.util.List;
         description = "Все методы для работы с продуктами и устлугами"
 )
 public class RestProductController {
+
     @Autowired
-    private final ProductServiceImpl productService;
+    private  final ProductServiceImpl productService;
 
     public RestProductController(ProductServiceImpl productService) {
         this.productService = productService;
@@ -38,7 +39,6 @@ public class RestProductController {
                 ? new ResponseEntity<>(products, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Product> read(@PathVariable(name = "id") int id) {
         final Product product = productService.read(id);
@@ -65,6 +65,5 @@ public class RestProductController {
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
-
 
 }

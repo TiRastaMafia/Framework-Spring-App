@@ -1,13 +1,10 @@
 package com.server.service;
 
+
 import java.util.List;
 
-public interface AppService<T, tId>{
-
-
+public interface AppService<T, tId> {
     void create(T t);
-
-
     List<T> readAll();
 
 
@@ -18,4 +15,5 @@ public interface AppService<T, tId>{
 
 
     boolean delete(tId id);
+
 }
