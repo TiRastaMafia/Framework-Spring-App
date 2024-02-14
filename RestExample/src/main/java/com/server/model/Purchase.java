@@ -2,7 +2,6 @@ package com.server.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,15 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Schema(description = "Заказ")
 public class Purchase {
-    public Purchase(List<Product> productList, Client client) {
-        this.productList = productList;
-        this.client = client;
-        int resultAmount = 0;
-        for (Product product: productList) {
-            resultAmount += product.getAmount();
-        }
-        this.purchaseAmount = resultAmount;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,5 +36,14 @@ public class Purchase {
     @Column(nullable = true)
     @Schema(description = "Сумма заказа")
     private int purchaseAmount;
-}
 
+    public Purchase(List<Product> productList, Client client) {
+        this.productList = productList;
+        this.client = client;
+        int resultAmount = 0;
+        for (Product product: productList) {
+            resultAmount += product.getAmount();
+        }
+        this.purchaseAmount = resultAmount;
+    }
+}

@@ -1,8 +1,11 @@
 package com.server.controller.restControllers;
 
 
+import com.server.model.ApiUsers;
 import com.server.model.Client;
 import com.server.model.Gender;
+import com.server.model.Role;
+import com.server.service.ApiUsersService;
 import com.server.service.ClientService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +26,20 @@ public class RestClientController {
 
     private final ClientService clientService;
 
+    private final ApiUsersService apiUsersService;
+
     @Autowired
-    public RestClientController(ClientService clientService) {
-
+    public RestClientController(ClientService clientService, ApiUsersService apiUsersService) {
         this.clientService = clientService;
+        this.apiUsersService = apiUsersService;
     }
-
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> create(@RequestBody Client client) {
+    public ResponseEntity<?> create(@RequestBody Client client, @RequestParam("Пароль") String password) {
+        ApiUsers apiUser = new ApiUsers();
+        apiUser.setPhone(client.getPhone());
+        apiUser.setRole(Role.CLIENT);
+        apiUser.setPassword(password);
+        apiUsersService.create(apiUser);
         clientService.create(client);
         return new ResponseEntity<>(client, HttpStatus.CREATED);
     }
@@ -44,7 +53,7 @@ public class RestClientController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Client> readId(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Client> read(@PathVariable(name = "id") int id) {
         final Client client = clientService.read(id);
 
         return client != null

@@ -1,6 +1,5 @@
 package com.server.controller.restControllers;
 
-
 import com.server.model.Product;
 import com.server.model.Purchase;
 import com.server.service.ClientServiceImpl;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("v1/purchase")
 @Tag(
@@ -23,12 +21,13 @@ import java.util.List;
         description = "Все методы для работы с заказами"
 )
 public class RestPurchaseController {
-    @Autowired
+
+
     private final PurchaseServiceImpl purchaseService;
     private final ProductServiceImpl productService;
-
     private final ClientServiceImpl clientService;
 
+    @Autowired
     public RestPurchaseController(PurchaseServiceImpl purchaseService, ProductServiceImpl productService, ClientServiceImpl clientService) {
         this.purchaseService = purchaseService;
         this.productService = productService;
@@ -44,7 +43,7 @@ public class RestPurchaseController {
         }
         Purchase purchase = new Purchase(products, clientService.read(clientId));
         purchaseService.create(purchase);
-        return new ResponseEntity<>(purchase, HttpStatus.OK);
+        return new ResponseEntity<>(purchase, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -56,7 +55,7 @@ public class RestPurchaseController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Purchase> readId(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Purchase> read(@PathVariable(name = "id") int id) {
         final Purchase purchase = purchaseService.read(id);
 
         return purchase != null

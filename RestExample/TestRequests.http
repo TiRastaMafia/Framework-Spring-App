@@ -1,3 +1,8 @@
+GET http://localhost:8080/v1/clients/filter?gender=MALE
+Accept: application/json
+
+
+###
 ### Удалить клиента по id
 DELETE http://localhost:8080/v1/clients/4
 Accept: application/json
@@ -11,10 +16,9 @@ PUT http://localhost:8080/v1/clients/2
 Content-Type: application/json
 
 {
-  "name": "Olga",
-  "email": "fgrrr1@asd",
-  "phone": "11123432",
-  "gender": "FEMALE"
+  "name": "PetyaNew",
+  "email": "234asdf21@asdNew",
+  "phone": "12sadf432New"
 }
 
 ### Получить список всех клиентов
@@ -26,19 +30,18 @@ POST http://localhost:8080/v1/clients
 Content-Type: application/json
 
 {
-  "name": "Petya",
-  "email": "234asdf21@asd",
-  "phone": "12sadf432",
+  "name": "gor",
+  "email": "234asdf21@345asd",
+  "phone": "4243453456",
   "gender": "MALE"
 }
 
-### Создать клиента
-POST http://localhost:8080/v1/clients
+
+### Авторизация
+POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "name": "Olga",
-  "email": "fgrrr1@asd",
-  "phone": "11123432",
-  "gender": "FEMALE"
+"phone": "+79658452615",
+"password": "123456"
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+
 @Service
 public class ClientServiceImpl implements ClientService {
 
@@ -51,8 +52,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> filterByGender(Gender gender) {
+    public List<Client> filterByGender(Gender gender){
         List<Client> filterClients = clientRepository.findClientByGender(gender);
         return filterClients;
+    }
+
+    @Override
+    public Client findByPhone(String phone) {
+        Client client = clientRepository.findByPhone(phone);
+        if (client != null){
+            return client;
+        } else {
+            return null;
+        }
     }
 }
