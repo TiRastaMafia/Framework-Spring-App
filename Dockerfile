@@ -1,4 +1,0 @@
-FROM postgres:13.2-alpine
-ENV POSTGRES_DB clientsdb
-ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD 1
